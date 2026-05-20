@@ -1,17 +1,18 @@
 # Biblioteca API
 
-API REST desarrollada con Node.js, Express, Sequelize y SQLite para la gestión de libros, socios y prestamos de una biblioteca.
+API REST desarrollada con Node.js, Express, Sequelize y SQLite para la gestión de libros, socios y prestamos de una biblioteca, implementando arquitectura MVC y reglas de negocio.
 
 ---
 
-# Tecnologias utilizadas
+# Tecnologías utilizadas
 
 * Node.js
-* Express
-* Sequelize
+* Express.js
+* Sequelize ORM
 * SQLite
 * Docker
 * Nodemon
+* Postman
 
 ---
 
@@ -24,6 +25,30 @@ La API permite:
 * Registrar préstamos
 * Registrar devoluciones
 * Validar reglas de negocio
+* Gestionar stock de libros
+* Consultar préstamos activos
+
+---
+
+# Arquitectura MVC
+
+El proyecto utiliza una arquitectura MVC adaptada para APIs REST.
+
+## Model
+
+Los modelos representan las entidades de la base de datos utilizando Sequelize.
+
+## Controller
+
+Los controladores contienen la lógica de negocio y validaciones.
+
+## Routes
+
+Las rutas definen los endpoints HTTP de la API.
+
+## View
+
+La vista está representada por las respuestas JSON consumidas mediante herramientas como Postman.
 
 ---
 
@@ -39,8 +64,16 @@ La API permite:
 
 # Estructura del proyecto
 
-
+```text
 biblioteca-api/
+│
+├── config/
+│   └── database.js
+│
+├── controllers/
+│   ├── librosController.js
+│   ├── sociosController.js
+│   └── prestamosController.js
 │
 ├── models/
 │   ├── Libro.js
@@ -52,59 +85,60 @@ biblioteca-api/
 │   ├── socios.js
 │   └── prestamos.js
 │
+├── database/
+│   ├── biblioteca.sqlite
+│   └── database.sql
 │
-|── screenshots/
-│   ├── Libros
-│   ├── Prestamos
-│   └── Socios
+├── screenshots/
+│   ├── libros/
+│   ├── prestamos/
+│   └── socios/
 │
-|
-|
-|
 ├── Dockerfile
 ├── docker-compose.yml
-├── database.js
-├── database.sql
-├── server.js
 ├── package.json
+├── package-lock.json
 ├── README.md
-└── biblioteca.sqlite
-
+├── .gitignore
+└── server.js
+```
 
 ---
 
-# Ejecucion local
+# Instalación local
 
 
 ## Instalar dependencias
 
-
+```bash
 npm install
-
+```
 
 ---
 
 ## Ejecutar servidor
 
+```bash
 npm run dev
+```
 
 ---
 
 # Ejecución con Docker
 
-
 ## Construir contenedor
 
+```bash
 docker compose build
-
+```
 
 ---
 
 ## Ejecutar contenedor
 
-
+```bash
 docker compose up
-
+```
 
 ---
 
@@ -119,108 +153,54 @@ http://localhost:3000
 
 # Libros
 
-| Metodo | Endpoint    | Descripcion              |
-| ------ | ----------- | ------------------------ |
-| GET    | /libros     | Obtener todos los libros |
-| GET    | /libros/:id | Obtener libro por ID     |
-| POST   | /libros     | Crear libro              |
-| PUT    | /libros/:id | Actualizar libro         |
-| DELETE | /libros/:id | Eliminar libro           |
+| Metodo | Endpoint    | Descripción              |
+| ------- | ------------ | ------------------------ |
+| GET     | /libros      | Obtener todos los libros |
+| GET     | /libros/:id  | Obtener libro por ID     |
+| POST    | /libros      | Crear libro              |
+| PUT     | /libros/:id  | Actualizar libro         |
+| DELETE  | /libros/:id  | Eliminar libro           |
 
 ---
 
 # Socios
 
-| Metodo | Endpoint    | Descripcion              |
-| ------ | ----------- | ------------------------ |
-| GET    | /socios     | Obtener todos los socios |
-| GET    | /socios/:id | Obtener socio por ID     |
-| POST   | /socios     | Crear socio              |
-| PUT    | /socios/:id | Actualizar socio         |
-| DELETE | /socios/:id | Eliminar socio           |
+| Método | Endpoint    | Descripción              |
+| ------- | ------------ | ------------------------ |
+| GET     | /socios      | Obtener todos los socios |
+| GET     | /socios/:id  | Obtener socio por ID     |
+| POST    | /socios      | Crear socio              |
+| PUT     | /socios/:id  | Actualizar socio         |
+| DELETE  | /socios/:id  | Eliminar socio           |
 
 ---
 
-# Prestamos
+# Préstamos
 
-| Metodo | Endpoint                | Descripcion                 |
-| ------ | ----------------------- | --------------------------- |
-| GET    | /prestamos              | Obtener todos los prestamos |
-| GET    | /prestamos/:id          | Obtener préstamo por ID     |
-| POST   | /prestamos              | Registrar préstamo          |
-| PUT    | /prestamos/:id/devolver | Registrar devolución        |
-| DELETE | /prestamos/:id          | Eliminar préstamo           |
-
----
-
-# Ejemplos de uso
-
-# Crear libro
-
-## POST /libros
-
-```json
-{
-  "titulo": "Harry Potter",
-  "autor": "J.K Rowling",
-  "stock": 5
-}
-
-
----
-
-# Crear socio
-
-## POST /socios
-
-.json
-{
-  "nombre": "Juan Perez",
-  "bloqueado": false
-}
-
-
----
-
-# Crear prestamo
-
-## POST /prestamos
-
-.json
-{
-  "socioId": 1,
-  "libroId": 1
-}
-
-
----
-
-# Respuesta de error
-
-## Libro sin stock
-
-.json
-{
-  "error": "No hay stock disponible"
-}
+| Método | Endpoint                | Descripción                 |
+| ------- | ----------------------- | --------------------------- |
+| GET     | /prestamos              | Obtener todos los préstamos |
+| GET     | /prestamos/:id          | Obtener préstamo por ID     |
+| POST    | /prestamos              | Registrar préstamo          |
+| PUT     | /prestamos/:id/devolver | Registrar devolución        |
+| DELETE  | /prestamos/:id          | Eliminar préstamo           |
 
 
 ---
 
 # Base de datos
 
-La aplicación utiliza SQLite junto con Sequelize.
+La aplicación utiliza SQLite junto con Sequelize ORM.
 
 Las tablas se generan automáticamente mediante:
 
-.js
+```js
 sequelize.sync()
+```
 
+También se incluye el archivo:
 
-Tambien se incluye el archivo:
-
-database.sql
-con el script de creacion de tablas.
+database.sql, con el script de creación de tablas.
 
 ---
 
@@ -228,7 +208,9 @@ con el script de creacion de tablas.
 
 El proyecto incluye:
 
+```text
 database.sql
+```
 
 con la estructura de tablas:
 
@@ -245,4 +227,6 @@ La API fue probada utilizando:
 * Postman
 * Docker Desktop
 * SQLite Browser
+
+
 
