@@ -1,0 +1,6 @@
+node_modules
+biblioteca.sqlite
+
+node_modules/
+.env
+*.sqlite
