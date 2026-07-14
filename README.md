@@ -21,6 +21,7 @@ Más allá de cumplir con las entregas, mi objetivo con este repo es también ll
 | [Relaciones Entre Entidades](./Relaciones%20Entre%20Entidades) | Trabajo práctico enfocado en relaciones entre clases (asociación, agregación, composición, herencia) | Java, diseño de clases |
 | [biblioteca-api](./biblioteca-api) | API de gestión de una biblioteca, siguiendo el patrón MVC | Java, MVC |
 | [Patrones-de-diseño](./Patrones-de-diseño) | TP1: sistema de cuentas bancarias con patrón Builder, y sistema de logs con patrón Singleton | Java, patrones de diseño (Builder, Singleton) |
+| [Objetos-heredados](./Objetos-heredados) | TP sobre los métodos heredados de `object` (`__str__`, `__repr__`, `__eq__`, `__hash__`), comparando su comportamiento por defecto con su versión sobrescrita | Python, métodos especiales |
 
 *(esta tabla se irá completando con cada nueva entrega)*
 
